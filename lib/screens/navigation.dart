@@ -29,17 +29,17 @@ class _NavigationState extends State<Navigation> {
     Typo(
       label: StaticString.home,
       variant: TypoVariant.title,
-      color: const Color(0xFFf4f6fb),
+      // color: const Color(0xFFf4f6fb),
     ),
     Typo(
       label: StaticString.transaction,
       variant: TypoVariant.title,
-      color: const Color(0xFFf4f6fb),
+      // color: const Color(0xFFf4f6fb),
     ),
     Typo(
       label: StaticString.report,
       variant: TypoVariant.title,
-      color: const Color(0xFFf4f6fb),
+      // color: const Color(0xFFf4f6fb),
     ),
   ];
 
