@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "97650605420",
+    "project_id": "savvy-9db26",
+    "storage_bucket": "savvy-9db26.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97650605420:android:4f3d9b60de1f31025e8749",
+        "android_client_info": {
+          "package_name": "com.example.savvy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBJgqXHI-HpBdUHDHviVwbU9HMfPQqskI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
