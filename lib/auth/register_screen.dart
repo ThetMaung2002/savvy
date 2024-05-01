@@ -1,14 +1,12 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:savvy/components/button.dart';
 import 'package:savvy/components/input.dart';
 import 'package:savvy/components/typo.dart';
 import 'package:savvy/constants/static_size.dart';
 import 'package:savvy/constants/static_string.dart';
+import 'package:savvy/helper/help_dialog.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -41,11 +39,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       createUserDoc(userDoc);
 
-      if (context.mounted) Navigator.pop(context);
+      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
+      Navigator.pop(context);
+      showDialog(
+        context: context,
+        builder: (context) => HelpDialog(
+          title: const Typo(
+            label: "Error Alert",
+            variant: TypoVariant.title,
+          ),
+          content: Typo(label: e.code, variant: TypoVariant.subtitle),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Typo(
+                label: "Close",
+                variant: TypoVariant.defaultVariant,
+              ),
+            )
+          ],
+        ),
+      );
     }
   }
 
