@@ -1,64 +1,39 @@
-// import 'package:flutter/material.dart';
-// import 'package:savvy/components/typo.dart';
-
-// class Dashboard extends StatelessWidget {
-//   const Dashboard({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: double.infinity,
-//       decoration: BoxDecoration(
-//         color: Theme.of(context).colorScheme.secondary,
-//         borderRadius: BorderRadius.circular(8.0),
-//       ),
-//       margin: const EdgeInsets.all(16.0),
-//       child: const Padding(
-//         padding: EdgeInsets.all(16.0),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: <Widget>[
-//             Typo(
-//               label: "Total",
-//               variant: TypoVariant.title,
-//               color: Colors.white,
-//             ),
-//             Typo(
-//               label: "",
-//               variant: TypoVariant.subtitle,
-//               color: Colors.white,
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// enum Type { size, large, medium, small, micro }
-
 import 'package:flutter/material.dart';
 import 'package:savvy/components/typo.dart';
+import 'package:savvy/constants/static_string.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
       padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        border: Border.all(width: 1),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: const Typo(
-        label: "Hello World",
-        variant: TypoVariant.defaultVariant,
+      child: Card(
+        color: Theme.of(context).colorScheme.surface,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Typo(
+                      label: "${StaticString.total!}:",
+                      variant: TypoVariant.title,
+                    ),
+                    const Typo(label: "100,000", variant: TypoVariant.subtitle),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
-
-//ToDo Build dashboard widget component to display datas of user
-//* 29th April 2024
-//* Author - ThetMaung2002

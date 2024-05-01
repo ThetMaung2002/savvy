@@ -1,6 +1,6 @@
 class StaticString {
   static String title = "Savvy";
-  static String home = "Home";
+  static String? home = "Home";
   static String chat = "Chat";
   static String notification = "Notification";
   static String profile = "Profile";
@@ -23,4 +23,7 @@ class StaticString {
   static String? addTransaction = "Add Transaction";
   static String? categories = "Categories";
   static String? close = "Close";
+  static String? tracking = "Tracking";
+  static String? wallet = "Wallet";
+  static String? total = "Total";
 }

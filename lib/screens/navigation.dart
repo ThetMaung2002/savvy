@@ -5,9 +5,9 @@ import 'package:savvy/constants/static_string.dart';
 import 'package:savvy/screens/home/home_screen.dart';
 import 'package:savvy/screens/notifications/notification_screen.dart';
 import 'package:savvy/screens/profile/profile_screen.dart';
-import 'package:savvy/screens/reports/report_screen.dart';
 import 'package:savvy/screens/settings/main_settings.dart';
-import 'package:savvy/screens/transaction/transaction_screen.dart';
+import 'package:savvy/screens/track/tracking_screen.dart';
+import 'package:savvy/screens/wallet/wallet_screen.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -21,25 +21,22 @@ class _NavigationState extends State<Navigation> {
 
   List<Widget> body = const [
     HomeScreen(),
-    TransactionScreen(),
-    ReportScreen(),
+    TrackingScreen(),
+    WalletScreen(),
   ];
 
   List<Widget> title = [
     Typo(
-      label: StaticString.home,
+      label: StaticString.home!,
       variant: TypoVariant.title,
-      // color: const Color(0xFFf4f6fb),
     ),
     Typo(
-      label: StaticString.transaction,
+      label: StaticString.tracking!,
       variant: TypoVariant.title,
-      // color: const Color(0xFFf4f6fb),
     ),
     Typo(
-      label: StaticString.report,
+      label: StaticString.wallet!,
       variant: TypoVariant.title,
-      // color: const Color(0xFFf4f6fb),
     ),
   ];
 
@@ -58,7 +55,9 @@ class _NavigationState extends State<Navigation> {
                 builder: (context) => const NotificationScreen(),
               ),
             ),
-            icon: const Icon(Icons.notifications),
+            icon: const Icon(
+              Icons.notifications,
+            ),
           ),
           menuIconButtonMethod(),
         ],
@@ -74,12 +73,12 @@ class _NavigationState extends State<Navigation> {
             label: "Home",
           ),
           NavigationDestination(
-            icon: Icon(Icons.attach_money),
-            label: "Transac",
+            icon: Icon(Icons.accessibility),
+            label: "Track",
           ),
           NavigationDestination(
-            icon: Icon(Icons.report),
-            label: "Report",
+            icon: Icon(Icons.wallet),
+            label: "Wallet",
           ),
         ],
         selectedIndex: _currentIndex,
@@ -118,7 +117,7 @@ class _NavigationState extends State<Navigation> {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const ProfileScreen(),
+              builder: (context) => ProfileScreen(),
             ),
           ),
           value: MenuItem.profile,
