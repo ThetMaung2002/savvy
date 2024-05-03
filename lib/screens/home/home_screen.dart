@@ -19,18 +19,21 @@ class _HomeScreenState extends State<HomeScreen> {
     "Total Amount": "100,000£",
     "Remaining Amount": "1,000£",
     "Spent Amount": "98,000£",
+    "Saving Amount": "1,000£"
   };
 
   List<String> balanceKeys = [
     "Total Amount",
     "Remaining Amount",
     "Spent Amount",
+    "Saving Amount",
   ];
 
   List<Color> colorCard = [
     const Color.fromRGBO(244, 67, 54, 0.6),
     const Color.fromRGBO(33, 150, 243, 0.6),
-    const Color.fromRGBO(76, 175, 80, 0.6)
+    const Color.fromRGBO(76, 175, 80, 0.6),
+    const Color.fromRGBO(233, 30, 99, 0.6)
   ];
 
   List<String> demoTitle = [
@@ -89,21 +92,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: ((context) => const SpendingCategory()),
+                      builder: (context) => const SpendingCategory(),
                     ),
                   );
                 },
                 child: const Typo(
                   label: "show",
                   variant: TypoVariant.defaultVariant,
-                  color: Colors.redAccent,
+                  color: Colors.purpleAccent,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 8.0),
           SizedBox(
-            height: 200,
+            height: 140,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: demoTitle.length,
@@ -158,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: 8.0),
           SizedBox(
-            height: 200,
+            height: 140,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: demoTitle.length,

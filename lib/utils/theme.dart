@@ -21,8 +21,8 @@ ThemeData lightTheme = ThemeData(
           : Color(0xff601410),
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xFFf7f9fd),
-      foregroundColor: Color(0xFF04060b),
+      backgroundColor: Color(0xFF4769cf),
+      foregroundColor: Color(0xFFf7f9fd),
       centerTitle: true,
     ),
     navigationBarTheme: const NavigationBarThemeData(
