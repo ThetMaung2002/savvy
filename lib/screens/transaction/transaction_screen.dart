@@ -9,51 +9,65 @@ class TransacScreen extends StatefulWidget {
 }
 
 class _TransacScreenState extends State<TransacScreen> {
+  Map<String, dynamic> transactionData = {
+    "Bus Service": 1000,
+    "Lunch Service": 800,
+    "Dinner Service": 5000,
+  };
+
   List<String> transactionAmount = [
-    "1000£ for Golden Burger",
-    "1000£ for Golden Burger",
-    "1000£ for Golden Burger",
-    "1000£ for Golden Burger",
-    "1000£ for Golden Burger",
-    "1000£ for Golden Burger",
-    "1000£ for Golden Burger",
-    "1000£ for Golden Burger",
-    "1000£ for Golden Burger",
-    "1000£ for Golden Burger",
-    "1000£ for Golden Burger",
-    "1000£ for Golden Burger",
+    "Bus Service",
+    "Lunch Service",
+    "Dinner Service",
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16.0),
-        scrollDirection: Axis.vertical,
-        itemCount: transactionAmount.length,
-        itemBuilder: ((context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: ListTile(
-              tileColor: Theme.of(context).colorScheme.secondary,
-              textColor: Theme.of(context).colorScheme.onSecondary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              onTap: () {},
-              title: Typo(
-                label: transactionAmount[index],
-                variant: TypoVariant.defaultVariant,
-              ),
+      body: _transactionListView(),
+      floatingActionButton: addTransactionAmount(),
+    );
+  }
+
+  ListView _transactionListView() {
+    return ListView.builder(
+      padding: const EdgeInsets.all(16.0),
+      scrollDirection: Axis.vertical,
+      itemCount: transactionAmount.length,
+      itemBuilder: ((context, index) {
+        String key = transactionAmount[index];
+        String value = transactionData[key].toString();
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: ListTile(
+            tileColor: const Color.fromRGBO(158, 158, 158, 0.2),
+            textColor: Theme.of(context).colorScheme.onSecondary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
             ),
-          );
-        }),
-      ),
-      floatingActionButton: FloatingActionButton(
-        shape: const CircleBorder(),
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
+            onTap: () {},
+            title: Typo(
+              label: key,
+              variant: TypoVariant.title,
+            ),
+            subtitle: Typo(
+              label: "$value kyats",
+              variant: TypoVariant.subtitle,
+            ),
+          ),
+        );
+      }),
+    );
+  }
+
+  FloatingActionButton addTransactionAmount() {
+    return FloatingActionButton(
+      shape: const CircleBorder(),
+      onPressed: () {
+        ChangeNotifier();
+      },
+      child: const Icon(Icons.add),
     );
   }
 }
