@@ -6,7 +6,7 @@ import 'package:savvy/screens/home/home_screen.dart';
 import 'package:savvy/screens/notifications/notification_screen.dart';
 import 'package:savvy/screens/profile/profile_screen.dart';
 import 'package:savvy/screens/settings/main_settings.dart';
-import 'package:savvy/screens/track/tracking_screen.dart';
+import 'package:savvy/screens/transaction/transaction_screen.dart';
 import 'package:savvy/screens/wallet/wallet_screen.dart';
 
 class Navigation extends StatefulWidget {
@@ -21,7 +21,7 @@ class _NavigationState extends State<Navigation> {
 
   List<Widget> body = const [
     HomeScreen(),
-    TrackingScreen(),
+    TransacScreen(),
     WalletScreen(),
   ];
 
@@ -31,7 +31,7 @@ class _NavigationState extends State<Navigation> {
       variant: TypoVariant.title,
     ),
     Typo(
-      label: StaticString.tracking!,
+      label: StaticString.transaction,
       variant: TypoVariant.title,
     ),
     Typo(
@@ -73,8 +73,8 @@ class _NavigationState extends State<Navigation> {
             label: "Home",
           ),
           NavigationDestination(
-            icon: Icon(Icons.accessibility),
-            label: "Track",
+            icon: Icon(Icons.attach_money),
+            label: "Transaction",
           ),
           NavigationDestination(
             icon: Icon(Icons.wallet),
@@ -93,6 +93,7 @@ class _NavigationState extends State<Navigation> {
 
   PopupMenuButton<MenuItem> menuIconButtonMethod() {
     return PopupMenuButton<MenuItem>(
+      icon: const Icon(Icons.more_vert),
       initialValue: indexItem,
       onSelected: (MenuItem item) {
         setState(() {

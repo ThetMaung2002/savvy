@@ -53,7 +53,18 @@ class ProfileScreen extends StatelessWidget {
             Map<String, dynamic>? user = snapshot.data!.data();
 
             return Center(
-              child: profileUI(user),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    profileUI(user),
+                    const SizedBox(height: 20.0),
+                    const Divider(
+                      color: Colors.grey,
+                    ),
+                  ],
+                ),
+              ),
             );
           }
 
@@ -68,11 +79,15 @@ class ProfileScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        const CircleAvatar(
+        CircleAvatar(
           radius: 48,
+          backgroundColor: const Color(0xFF889fe4),
+          foregroundColor: const Color(0xFF04060b),
+          child: Typo(
+              label: user!['username'], variant: TypoVariant.defaultVariant),
         ),
         const SizedBox(height: 20.0),
-        Typo(label: user!['username'], variant: TypoVariant.title),
+        Typo(label: user['username'], variant: TypoVariant.title),
         Typo(label: user['email'], variant: TypoVariant.subtitle),
       ],
     );

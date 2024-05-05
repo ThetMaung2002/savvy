@@ -73,7 +73,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           .doc(userCredential.user!.email)
           .set({
         'email': userCredential.user!.email,
-        'username': _usernameController.text
+        'username': _usernameController.text,
+        'uid': userCredential.user!.uid
       });
     }
   }

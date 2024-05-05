@@ -26,4 +26,6 @@ class StaticString {
   static String? tracking = "Tracking";
   static String? wallet = "Wallet";
   static String? total = "Total";
+  static String? confirm = "Confirm";
+  static String? cancel = "Cancel";
 }
