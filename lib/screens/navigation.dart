@@ -93,6 +93,7 @@ class _NavigationState extends State<Navigation> {
 
   PopupMenuButton<MenuItem> menuIconButtonMethod() {
     return PopupMenuButton<MenuItem>(
+      icon: const Icon(Icons.more_vert),
       initialValue: indexItem,
       onSelected: (MenuItem item) {
         setState(() {

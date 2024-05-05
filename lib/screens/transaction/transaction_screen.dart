@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:savvy/components/input.dart';
 import 'package:savvy/components/typo.dart';
+import 'package:savvy/constants/static_string.dart';
+import 'package:savvy/provider/add_transaction_provider.dart';
 
 class TransacScreen extends StatefulWidget {
   const TransacScreen({super.key});
@@ -9,17 +13,18 @@ class TransacScreen extends StatefulWidget {
 }
 
 class _TransacScreenState extends State<TransacScreen> {
-  Map<String, dynamic> transactionData = {
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController expenseTransactionController =
+      TextEditingController();
+
+  // Consider using a Money class or dedicated libraries for currency handling
+  final Map<String, num> transactionData = {
     "Bus Service": 1000,
     "Lunch Service": 800,
     "Dinner Service": 5000,
   };
 
-  List<String> transactionAmount = [
-    "Bus Service",
-    "Lunch Service",
-    "Dinner Service",
-  ];
+  final List<String> transactionTitles = [];
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +38,10 @@ class _TransacScreenState extends State<TransacScreen> {
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
       scrollDirection: Axis.vertical,
-      itemCount: transactionAmount.length,
+      itemCount: transactionTitles.length,
       itemBuilder: ((context, index) {
-        String key = transactionAmount[index];
-        String value = transactionData[key].toString();
-
+        final String title = transactionTitles[index];
+        final num amount = transactionData[title]!;
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: ListTile(
@@ -46,13 +50,12 @@ class _TransacScreenState extends State<TransacScreen> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
-            onTap: () {},
             title: Typo(
-              label: key,
+              label: title,
               variant: TypoVariant.title,
             ),
             subtitle: Typo(
-              label: "$value kyats",
+              label: "${amount.toString()} kyats",
               variant: TypoVariant.subtitle,
             ),
           ),
@@ -65,7 +68,65 @@ class _TransacScreenState extends State<TransacScreen> {
     return FloatingActionButton(
       shape: const CircleBorder(),
       onPressed: () {
-        ChangeNotifier();
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Typo(
+              label: "Transaction",
+              variant: TypoVariant.title,
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Input(
+                  securePassword: false,
+                  placehodler: "Title",
+                  controller: titleController,
+                ),
+                const SizedBox(height: 20),
+                Input(
+                  securePassword: false,
+                  placehodler: "Transaction",
+                  controller: expenseTransactionController,
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Typo(
+                  label: StaticString.cancel!,
+                  variant: TypoVariant.defaultVariant,
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Pop circle progress indicator
+
+                  // Error occur
+
+                  // Add transaction
+
+                  final title = titleController.text;
+                  final amount = num.tryParse(
+                    expenseTransactionController.text,
+                  );
+                  context.read<TransactionProvider>().addTransaction(
+                        amount!,
+                        title,
+                      );
+                  titleController.clear();
+                  expenseTransactionController.clear();
+                  Navigator.pop(context);
+                },
+                child: Typo(
+                  label: StaticString.confirm!,
+                  variant: TypoVariant.defaultVariant,
+                ),
+              ),
+            ],
+          ),
+        );
       },
       child: const Icon(Icons.add),
     );
