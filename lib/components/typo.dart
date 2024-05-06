@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:savvy/constants/google_string.dart';
 
 class Typo extends StatelessWidget {
   const Typo({
@@ -19,7 +20,7 @@ class Typo extends StatelessWidget {
       label,
       style: TextStyle(
         fontSize: size,
-        fontFamily: 'Itim',
+        fontFamily: GoogleString.itim,
         color: color,
       ),
     );
