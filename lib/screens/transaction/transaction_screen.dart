@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:savvy/components/input.dart';
 import 'package:savvy/components/typo.dart';
 import 'package:savvy/constants/static_string.dart';
-import 'package:savvy/provider/add_transaction_provider.dart';
+import 'package:savvy/provider/transaction_provider/add_transaction_provider.dart';
 
 class TransacScreen extends StatefulWidget {
   const TransacScreen({super.key});
@@ -17,7 +17,6 @@ class _TransacScreenState extends State<TransacScreen> {
   final TextEditingController expenseTransactionController =
       TextEditingController();
 
-  // Consider using a Money class or dedicated libraries for currency handling
   final Map<String, num> transactionData = {
     "Bus Service": 1000,
     "Lunch Service": 800,
@@ -101,12 +100,6 @@ class _TransacScreenState extends State<TransacScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  // Pop circle progress indicator
-
-                  // Error occur
-
-                  // Add transaction
-
                   final title = titleController.text;
                   final amount = num.tryParse(
                     expenseTransactionController.text,
