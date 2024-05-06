@@ -9,7 +9,7 @@ import 'package:savvy/components/input.dart';
 import 'package:savvy/components/typo.dart';
 import 'package:savvy/constants/static_size.dart';
 import 'package:savvy/constants/static_string.dart';
-import 'package:savvy/helper/help_dialog.dart';
+import 'package:savvy/components/help_dialog.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

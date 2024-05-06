@@ -17,7 +17,6 @@ class _TransacScreenState extends State<TransacScreen> {
   final TextEditingController expenseTransactionController =
       TextEditingController();
 
-  // Consider using a Money class or dedicated libraries for currency handling
   final Map<String, num> transactionData = {
     "Bus Service": 1000,
     "Lunch Service": 800,
@@ -101,12 +100,6 @@ class _TransacScreenState extends State<TransacScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  // Pop circle progress indicator
-
-                  // Error occur
-
-                  // Add transaction
-
                   final title = titleController.text;
                   final amount = num.tryParse(
                     expenseTransactionController.text,
