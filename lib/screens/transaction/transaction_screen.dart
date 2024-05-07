@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:savvy/components/input.dart';
 import 'package:savvy/components/typo.dart';
 import 'package:savvy/constants/static_string.dart';
-import 'package:savvy/provider/transaction_provider/add_transaction_provider.dart';
 
 class TransacScreen extends StatefulWidget {
   const TransacScreen({super.key});
@@ -99,19 +97,7 @@ class _TransacScreenState extends State<TransacScreen> {
                 ),
               ),
               TextButton(
-                onPressed: () {
-                  final title = titleController.text;
-                  final amount = num.tryParse(
-                    expenseTransactionController.text,
-                  );
-                  context.read<TransactionProvider>().addTransaction(
-                        amount!,
-                        title,
-                      );
-                  titleController.clear();
-                  expenseTransactionController.clear();
-                  Navigator.pop(context);
-                },
+                onPressed: () {},
                 child: Typo(
                   label: StaticString.confirm!,
                   variant: TypoVariant.defaultVariant,
