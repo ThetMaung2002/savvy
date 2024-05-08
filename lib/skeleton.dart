@@ -1,7 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:savvy/components/typo.dart';
 import 'package:savvy/constants/static_string.dart';
+import 'package:savvy/provider/authentication_provider/login_provider.dart';
 import 'package:savvy/screens/home/home_screen.dart';
 import 'package:savvy/screens/notifications/notification_screen.dart';
 import 'package:savvy/screens/profile/profile_screen.dart';
@@ -165,8 +166,7 @@ class _NavigationState extends State<Navigation> {
           ),
           TextButton(
             onPressed: () async {
-              await FirebaseAuth.instance.signOut();
-              // ignore: use_build_context_synchronously
+              context.read<LoginProvider>().logout();
               Navigator.pop(context);
             },
             child: const Typo(

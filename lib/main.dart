@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:savvy/constants/static_string.dart';
 import 'package:savvy/firebase_options.dart';
+import 'package:savvy/provider/authentication_provider/login_provider.dart';
+import 'package:savvy/provider/authentication_provider/reisgter_provider.dart';
 import 'package:savvy/provider/transaction_provider/add_transaction_provider.dart';
 import 'package:savvy/provider/authentication_provider/auth_provider.dart';
 import 'package:savvy/provider/color_provider/theme_provider.dart';
@@ -33,6 +35,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LoginProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RegisterProvider(),
         ),
       ],
       child: MaterialApp(
