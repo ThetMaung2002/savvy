@@ -12,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
 
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetails() async {
     return await FirebaseFirestore.instance
-        .collection('Users')
+        .collection('users')
         .doc(_currentUser!.email)
         .get();
   }

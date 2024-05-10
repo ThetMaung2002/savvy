@@ -33,7 +33,7 @@ class Typo extends StatelessWidget {
       case TypoVariant.header:
         return 40.0;
       case TypoVariant.label:
-        return 12.0;
+        return 14.0;
       case TypoVariant.subtitle:
         return 18.0;
       case TypoVariant.defaultVariant:

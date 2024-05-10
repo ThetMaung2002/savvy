@@ -29,3 +29,5 @@ class StaticString {
   static String? confirm = "Confirm";
   static String? cancel = "Cancel";
 }
+
+const String addTransactionPage = "Add Transacion";

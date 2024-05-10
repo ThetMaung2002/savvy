@@ -1,109 +1,26 @@
 import 'package:flutter/material.dart';
-// import 'package:savvy/components/input.dart';
 import 'package:savvy/components/typo.dart';
-// import 'package:savvy/constants/static_string.dart';
+import 'package:savvy/screens/transaction/add_transaction_page.dart';
 
 class TransacScreen extends StatelessWidget {
-  TransacScreen({super.key});
-
-  final TextEditingController titleController = TextEditingController();
-
-  final TextEditingController expenseTransactionController =
-      TextEditingController();
-
-  final Map<String, num> transactionData = {
-    "Bus Service": 1000,
-    "Lunch Service": 800,
-    "Dinner Service": 5000,
-  };
-
-  final List<String> transactionTitles = [];
+  const TransacScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _transactionListView(),
-      floatingActionButton: addTransactionAmount(),
+      body: const Center(
+        child: Typo(label: "Great one", variant: TypoVariant.defaultVariant),
+      ),
+      floatingActionButton: addTransactionAmount(context),
     );
   }
 
-  ListView _transactionListView() {
-    return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      scrollDirection: Axis.vertical,
-      itemCount: transactionTitles.length,
-      itemBuilder: ((context, index) {
-        final String title = transactionTitles[index];
-        final num amount = transactionData[title]!;
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: ListTile(
-            tileColor: const Color.fromRGBO(158, 158, 158, 0.2),
-            textColor: Theme.of(context).colorScheme.onSecondary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            title: Typo(
-              label: title,
-              variant: TypoVariant.title,
-            ),
-            subtitle: Typo(
-              label: "${amount.toString()} kyats",
-              variant: TypoVariant.subtitle,
-            ),
-          ),
-        );
-      }),
-    );
-  }
-
-  FloatingActionButton addTransactionAmount() {
+  FloatingActionButton addTransactionAmount(BuildContext context) {
     return FloatingActionButton(
       shape: const CircleBorder(),
-      onPressed: () {},
+      onPressed: () => Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => AddTransactionPage())),
       child: const Icon(Icons.add),
     );
   }
 }
-
-// showDialog(
-//   context: context,
-//   builder: (context) => AlertDialog(
-//     title: const Typo(
-//       label: "Transaction",
-//       variant: TypoVariant.title,
-//     ),
-//     content: Column(
-//       mainAxisSize: MainAxisSize.min,
-//       children: [
-//         Input(
-//           securePassword: false,
-//           placehodler: "Title",
-//           controller: titleController,
-//         ),
-//         const SizedBox(height: 20),
-//         Input(
-//           securePassword: false,
-//           placehodler: "Transaction",
-//           controller: expenseTransactionController,
-//         ),
-//       ],
-//     ),
-//     actions: [
-//       TextButton(
-//         onPressed: () => Navigator.pop(context),
-//         child: Typo(
-//           label: StaticString.cancel!,
-//           variant: TypoVariant.defaultVariant,
-//         ),
-//       ),
-//       TextButton(
-//         onPressed: () {},
-//         child: Typo(
-//           label: StaticString.confirm!,
-//           variant: TypoVariant.defaultVariant,
-//         ),
-//       ),
-//     ],
-//   ),
-// );
