@@ -21,7 +21,6 @@ class RegisterProvider extends ChangeNotifier {
     );
 
     try {
-      // UserCredential _userCredentials =
       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,

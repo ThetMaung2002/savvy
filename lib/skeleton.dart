@@ -20,10 +20,10 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   int _currentIndex = 0;
 
-  List<Widget> body = const [
-    HomeScreen(),
+  List<Widget> body = [
+    const HomeScreen(),
     TransacScreen(),
-    WalletScreen(),
+    const WalletScreen(),
   ];
 
   List<Widget> title = [

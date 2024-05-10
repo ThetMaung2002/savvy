@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:savvy/components/input.dart';
+// import 'package:savvy/components/input.dart';
 import 'package:savvy/components/typo.dart';
-import 'package:savvy/constants/static_string.dart';
+// import 'package:savvy/constants/static_string.dart';
 
-class TransacScreen extends StatefulWidget {
-  const TransacScreen({super.key});
+class TransacScreen extends StatelessWidget {
+  TransacScreen({super.key});
 
-  @override
-  State<TransacScreen> createState() => _TransacScreenState();
-}
-
-class _TransacScreenState extends State<TransacScreen> {
   final TextEditingController titleController = TextEditingController();
+
   final TextEditingController expenseTransactionController =
       TextEditingController();
 
@@ -64,50 +60,50 @@ class _TransacScreenState extends State<TransacScreen> {
   FloatingActionButton addTransactionAmount() {
     return FloatingActionButton(
       shape: const CircleBorder(),
-      onPressed: () {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Typo(
-              label: "Transaction",
-              variant: TypoVariant.title,
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Input(
-                  securePassword: false,
-                  placehodler: "Title",
-                  controller: titleController,
-                ),
-                const SizedBox(height: 20),
-                Input(
-                  securePassword: false,
-                  placehodler: "Transaction",
-                  controller: expenseTransactionController,
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Typo(
-                  label: StaticString.cancel!,
-                  variant: TypoVariant.defaultVariant,
-                ),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Typo(
-                  label: StaticString.confirm!,
-                  variant: TypoVariant.defaultVariant,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+      onPressed: () {},
       child: const Icon(Icons.add),
     );
   }
 }
+
+// showDialog(
+//   context: context,
+//   builder: (context) => AlertDialog(
+//     title: const Typo(
+//       label: "Transaction",
+//       variant: TypoVariant.title,
+//     ),
+//     content: Column(
+//       mainAxisSize: MainAxisSize.min,
+//       children: [
+//         Input(
+//           securePassword: false,
+//           placehodler: "Title",
+//           controller: titleController,
+//         ),
+//         const SizedBox(height: 20),
+//         Input(
+//           securePassword: false,
+//           placehodler: "Transaction",
+//           controller: expenseTransactionController,
+//         ),
+//       ],
+//     ),
+//     actions: [
+//       TextButton(
+//         onPressed: () => Navigator.pop(context),
+//         child: Typo(
+//           label: StaticString.cancel!,
+//           variant: TypoVariant.defaultVariant,
+//         ),
+//       ),
+//       TextButton(
+//         onPressed: () {},
+//         child: Typo(
+//           label: StaticString.confirm!,
+//           variant: TypoVariant.defaultVariant,
+//         ),
+//       ),
+//     ],
+//   ),
+// );
