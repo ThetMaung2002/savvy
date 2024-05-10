@@ -15,7 +15,7 @@ class AuthProvider extends StatelessWidget {
           if (snapshot.hasData) {
             return const Navigation();
           } else {
-            return const LoginScreen();
+            return LoginScreen();
           }
         }),
       ),

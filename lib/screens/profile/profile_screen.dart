@@ -29,7 +29,6 @@ class ProfileScreen extends StatelessWidget {
       body: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         future: getUserDetails(),
         builder: (context, snapshot) {
-          //Loading before fetching data from backend.
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(
@@ -38,7 +37,6 @@ class ProfileScreen extends StatelessWidget {
             );
           }
 
-          //Error when there is not data from backend.
           if (snapshot.hasError) {
             return Center(
               child: Typo(
@@ -48,28 +46,22 @@ class ProfileScreen extends StatelessWidget {
             );
           }
 
-          //Data receive from the backend.
-          if (snapshot.hasData) {
-            Map<String, dynamic>? user = snapshot.data!.data();
+          Map<String, dynamic>? user = snapshot.data!.data();
 
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    profileUI(user),
-                    const SizedBox(height: 20.0),
-                    const Divider(
-                      color: Colors.grey,
-                    ),
-                  ],
-                ),
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  profileUI(user),
+                  const SizedBox(height: 20.0),
+                  const Divider(
+                    color: Colors.grey,
+                  ),
+                ],
               ),
-            );
-          }
-
-          return const Typo(
-              label: "No Data", variant: TypoVariant.defaultVariant);
+            ),
+          );
         },
       ),
     );
