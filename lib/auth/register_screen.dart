@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:savvy/components/button.dart';
@@ -67,11 +68,23 @@ class RegisterScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Button(
                   onPressed: () {
-                    context.read<RegisterProvider>().register(
+                    context
+                        .read<RegisterProvider>()
+                        .register(
                           _emailController.text,
                           _passwordController.text,
                           context,
-                        );
+                        )
+                        .onError((error, stackTrace) {
+                      if (kDebugMode) {
+                        print("Error ===> $error");
+                      }
+                    });
+
+                    context.read<RegisterProvider>().saveUserData(
+                        _emailController.text,
+                        _usernameController.text,
+                        DateTime.now());
                   },
                   label: "Submit",
                   minWidth: StaticSize.confirmButton,

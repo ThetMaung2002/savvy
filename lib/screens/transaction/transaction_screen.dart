@@ -1,109 +1,66 @@
 import 'package:flutter/material.dart';
-// import 'package:savvy/components/input.dart';
 import 'package:savvy/components/typo.dart';
-// import 'package:savvy/constants/static_string.dart';
+import 'package:savvy/provider/transaction_provider/get_user_transaction_provider.dart';
+import 'package:savvy/screens/transaction/add_transaction_page.dart';
 
 class TransacScreen extends StatelessWidget {
-  TransacScreen({super.key});
-
-  final TextEditingController titleController = TextEditingController();
-
-  final TextEditingController expenseTransactionController =
-      TextEditingController();
-
-  final Map<String, num> transactionData = {
-    "Bus Service": 1000,
-    "Lunch Service": 800,
-    "Dinner Service": 5000,
-  };
-
-  final List<String> transactionTitles = [];
+  const TransacScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _transactionListView(),
-      floatingActionButton: addTransactionAmount(),
-    );
-  }
-
-  ListView _transactionListView() {
-    return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      scrollDirection: Axis.vertical,
-      itemCount: transactionTitles.length,
-      itemBuilder: ((context, index) {
-        final String title = transactionTitles[index];
-        final num amount = transactionData[title]!;
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: ListTile(
-            tileColor: const Color.fromRGBO(158, 158, 158, 0.2),
-            textColor: Theme.of(context).colorScheme.onSecondary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            title: Typo(
-              label: title,
-              variant: TypoVariant.title,
-            ),
-            subtitle: Typo(
-              label: "${amount.toString()} kyats",
-              variant: TypoVariant.subtitle,
-            ),
-          ),
-        );
-      }),
-    );
-  }
-
-  FloatingActionButton addTransactionAmount() {
-    return FloatingActionButton(
-      shape: const CircleBorder(),
-      onPressed: () {},
-      child: const Icon(Icons.add),
+      body: FutureBuilder<List<Transaction>>(
+        future: GetUserTransactionProvider()
+            .getTransaction(), // Pass the name of the user
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          }
+          final transactions = snapshot.data!;
+          return ListView.builder(
+            itemCount: transactions.length,
+            itemBuilder: (context, index) {
+              final transaction = transactions[index];
+              return Card(
+                elevation: 1,
+                color: Colors.green,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Typo(
+                      label: transaction.description,
+                      variant: TypoVariant.title,
+                    ),
+                    const SizedBox(height: 20),
+                    Typo(
+                      label: "${transaction.amount}",
+                      variant: TypoVariant.subtitle,
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => AddTransactionPage()));
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
-
-// showDialog(
-//   context: context,
-//   builder: (context) => AlertDialog(
-//     title: const Typo(
-//       label: "Transaction",
-//       variant: TypoVariant.title,
-//     ),
-//     content: Column(
-//       mainAxisSize: MainAxisSize.min,
-//       children: [
-//         Input(
-//           securePassword: false,
-//           placehodler: "Title",
-//           controller: titleController,
-//         ),
-//         const SizedBox(height: 20),
-//         Input(
-//           securePassword: false,
-//           placehodler: "Transaction",
-//           controller: expenseTransactionController,
-//         ),
-//       ],
-//     ),
-//     actions: [
-//       TextButton(
-//         onPressed: () => Navigator.pop(context),
-//         child: Typo(
-//           label: StaticString.cancel!,
-//           variant: TypoVariant.defaultVariant,
-//         ),
-//       ),
-//       TextButton(
-//         onPressed: () {},
-//         child: Typo(
-//           label: StaticString.confirm!,
-//           variant: TypoVariant.defaultVariant,
-//         ),
-//       ),
-//     ],
-//   ),
-// );
