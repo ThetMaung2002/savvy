@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:savvy/components/button.dart';
 import 'package:savvy/components/typo.dart';
 import 'package:savvy/constants/static_string.dart';
 import 'package:savvy/provider/authentication_provider/reisgter_provider.dart';
@@ -54,17 +56,20 @@ class AddTransactionPage extends StatelessWidget {
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.read<TransactionProvider>().addTransactionAmount(
-                          double.parse(_amountController.text),
-                          _descriptionController.text,
-                          username,
-                          context);
-                    },
-                    child: const Text('Add Transaction'),
-                  ),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Button(
+                      minWidth: double.infinity,
+                      onPressed: () => context
+                          .read<TransactionProvider>()
+                          .addTransactionAmount(
+                              double.parse(_amountController.text),
+                              _descriptionController.text,
+                              username,
+                              context),
+                      label: "Add Transaction",
+                    ),
+                  )
                 ],
               ),
             );

@@ -53,6 +53,8 @@ class TransactionProvider extends ChangeNotifier {
         }
 
         if (context!.mounted) Navigator.of(context).pop();
+
+        dispose();
       } else {
         // Handle the case when no user document is found for the current user's email
         if (kDebugMode) {
