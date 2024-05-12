@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:savvy/constants/google_string.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Typo extends StatelessWidget {
   const Typo({
@@ -18,9 +18,8 @@ class Typo extends StatelessWidget {
     double size = _getSizeForVariant(variant);
     return Text(
       label,
-      style: TextStyle(
+      style: GoogleFonts.nunitoSans(
         fontSize: size,
-        fontFamily: GoogleString.itim,
         color: color,
       ),
     );

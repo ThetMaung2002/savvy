@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:savvy/constants/static_string.dart';
 import 'package:savvy/firebase_options.dart';
@@ -12,7 +11,6 @@ import 'package:savvy/provider/transaction_provider/add_transaction_provider.dar
 import 'package:savvy/utils/theme.dart';
 
 void main() async {
-  GoogleFonts.config.allowRuntimeFetching = false;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
