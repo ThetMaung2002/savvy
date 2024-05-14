@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:savvy/components/button.dart';
 import 'package:savvy/components/typo.dart';
@@ -40,6 +39,7 @@ class AddTransactionPage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextFormField(
                     controller: _amountController,
@@ -59,7 +59,7 @@ class AddTransactionPage extends StatelessWidget {
                   const SizedBox(height: 20),
                   Center(
                     child: Button(
-                      minWidth: double.infinity,
+                      minWidth: double.minPositive,
                       onPressed: () => context
                           .read<TransactionProvider>()
                           .addTransactionAmount(

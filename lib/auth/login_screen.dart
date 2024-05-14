@@ -22,41 +22,6 @@ class LoginScreen extends StatelessWidget {
 
   final TextEditingController _passwordController = TextEditingController();
 
-  // void _login() async {
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) => const Center(
-  //       child: CircularProgressIndicator(),
-  //     ),
-  //   );
-
-  //   try {
-  //     await FirebaseAuth.instance.signInWithEmailAndPassword(
-  //       email: _emailController.text,
-  //       password: _passwordController.text,
-  //     );
-  //     Navigator.pop(context);
-  //   } on FirebaseAuthException catch (e) {
-  //     Navigator.pop(context);
-  //     showDialog(
-  //       context: context,
-  //       builder: (context) => HelpDialog(
-  //         title: const Typo(label: "Error Alert", variant: TypoVariant.title),
-  //         content: Typo(label: e.code, variant: TypoVariant.subtitle),
-  //         actions: [
-  //           TextButton(
-  //             onPressed: () => Navigator.pop(context),
-  //             child: const Typo(
-  //               label: "Close",
-  //               variant: TypoVariant.defaultVariant,
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

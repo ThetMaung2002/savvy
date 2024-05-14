@@ -59,7 +59,10 @@ class TransacScreen extends StatelessWidget {
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => AddTransactionPage()));
         },
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }
