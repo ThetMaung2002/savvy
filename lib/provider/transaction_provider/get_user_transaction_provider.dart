@@ -1,60 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:savvy/models/transaction_models/get_transaction_model.dart';
 
 class GetUserTransactionProvider extends ChangeNotifier {
-  Future<List<Transaction>> getTransaction() async {
-    String user = FirebaseAuth.instance.currentUser!.email!;
+  Future<List<GetTransacionModel>> getTransaction() async {
+    String userEmail = FirebaseAuth.instance.currentUser!.email!;
 
-    CollectionReference usersRef =
-        FirebaseFirestore.instance.collection('users');
+    // Reference to the user's transactions directly using their email
+    CollectionReference transactionsRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(userEmail)
+        .collection('user_expenses');
 
-    QuerySnapshot userQuerySnapshot =
-        await usersRef.where('email', isEqualTo: user).get();
+    QuerySnapshot transactionQuerySnapshot = await transactionsRef.get();
 
-    if (userQuerySnapshot.docs.isNotEmpty) {
-      CollectionReference transactionsRef = usersRef
-          .doc(userQuerySnapshot.docs.first.id)
-          .collection('user_expenses')
-          .doc() as CollectionReference<Object?>;
-
-      QuerySnapshot transactionQuerySnapshot = await transactionsRef.get();
-
-      List<Transaction> transactions = [];
-      for (var transactionDoc in transactionQuerySnapshot.docs) {
-        Object? data = transactionDoc.data();
-        Transaction transaction =
-            Transaction.fromMap(data as Map<String, dynamic>);
-        transactions.add(transaction);
-      }
-
-      notifyListeners();
-
-      dispose();
-
-      return transactions;
-    } else {
-      return [];
+    List<GetTransacionModel> transactions = [];
+    for (var transactionDoc in transactionQuerySnapshot.docs) {
+      Object? data = transactionDoc.data();
+      GetTransacionModel transaction =
+          GetTransacionModel.fromMap(data as Map<String, dynamic>);
+      transactions.add(transaction);
     }
-  }
-}
 
-class Transaction {
-  final double amount;
-  final String description;
-  final Timestamp timestamp;
-
-  Transaction({
-    required this.amount,
-    required this.description,
-    required this.timestamp,
-  });
-
-  factory Transaction.fromMap(Map<String, dynamic> map) {
-    return Transaction(
-      amount: map['amount'],
-      description: map['description'],
-      timestamp: map['timestamp'],
-    );
+    return transactions;
   }
 }

@@ -22,7 +22,7 @@ class _NavigationState extends State<Navigation> {
 
   List<Widget> body = [
     const HomeScreen(),
-    TransacScreen(),
+    const TransacScreen(),
     const WalletScreen(),
   ];
 

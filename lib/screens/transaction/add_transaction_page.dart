@@ -60,13 +60,11 @@ class AddTransactionPage extends StatelessWidget {
                   Center(
                     child: Button(
                       minWidth: double.minPositive,
-                      onPressed: () => context
-                          .read<TransactionProvider>()
-                          .addTransactionAmount(
-                              double.parse(_amountController.text),
-                              _descriptionController.text,
-                              username,
-                              context),
+                      onPressed: () =>
+                          context.read<TransactionProvider>().addTransaction(
+                                double.parse(_amountController.text),
+                                _descriptionController.text,
+                              ),
                       label: "Add Transaction",
                     ),
                   )
