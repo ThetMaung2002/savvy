@@ -1,65 +1,21 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:savvy/components/button.dart';
 import 'package:savvy/components/input.dart';
 import 'package:savvy/components/typo.dart';
 import 'package:savvy/constants/static_size.dart';
 import 'package:savvy/constants/static_string.dart';
+import 'package:savvy/provider/authentication_provider/reisgter_provider.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  RegisterScreen({super.key});
 
-  @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _usernameController = TextEditingController();
 
   final TextEditingController _emailController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
-
-  void register() async {
-    showDialog(
-      context: context,
-      builder: ((context) => const Center(
-            child: CircularProgressIndicator(),
-          )),
-    );
-
-    try {
-      UserCredential userDoc =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-
-      createUserDoc(userDoc);
-
-      if (context.mounted) Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
-    }
-  }
-
-  Future<void> createUserDoc(UserCredential? userCredential) async {
-    if (userCredential != null && userCredential.user != null) {
-      await FirebaseFirestore.instance
-          .collection("Users")
-          .doc(userCredential.user!.email)
-          .set({
-        'email': userCredential.user!.email,
-        'username': _usernameController.text
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +68,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 alignment: Alignment.center,
                 child: Button(
                   onPressed: () {
-                    register();
+                    context
+                        .read<RegisterProvider>()
+                        .register(
+                          _emailController.text,
+                          _passwordController.text,
+                          context,
+                        )
+                        .onError((error, stackTrace) {
+                      if (kDebugMode) {
+                        print("Error ===> $error");
+                      }
+                    });
+
+                    context.read<RegisterProvider>().saveUserData(
+                        _emailController.text,
+                        _usernameController.text,
+                        DateTime.now());
                   },
                   label: "Submit",
                   minWidth: StaticSize.confirmButton,

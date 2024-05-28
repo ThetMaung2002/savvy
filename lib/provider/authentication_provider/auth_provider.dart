@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:savvy/auth/login_screen.dart';
-import 'package:savvy/screens/navigation.dart';
+import 'package:savvy/skeleton.dart';
 
 class AuthProvider extends StatelessWidget {
   const AuthProvider({super.key});
@@ -15,7 +15,7 @@ class AuthProvider extends StatelessWidget {
           if (snapshot.hasData) {
             return const Navigation();
           } else {
-            return const LoginScreen();
+            return LoginScreen();
           }
         }),
       ),

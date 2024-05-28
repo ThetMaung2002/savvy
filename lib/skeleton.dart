@@ -1,13 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:savvy/components/typo.dart';
 import 'package:savvy/constants/static_string.dart';
+import 'package:savvy/provider/authentication_provider/login_provider.dart';
 import 'package:savvy/screens/home/home_screen.dart';
 import 'package:savvy/screens/notifications/notification_screen.dart';
 import 'package:savvy/screens/profile/profile_screen.dart';
-import 'package:savvy/screens/reports/report_screen.dart';
 import 'package:savvy/screens/settings/main_settings.dart';
 import 'package:savvy/screens/transaction/transaction_screen.dart';
+import 'package:savvy/screens/wallet/wallet_screen.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -19,27 +20,24 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   int _currentIndex = 0;
 
-  List<Widget> body = const [
-    HomeScreen(),
-    TransactionScreen(),
-    ReportScreen(),
+  List<Widget> body = [
+    const HomeScreen(),
+    TransacScreen(),
+    const WalletScreen(),
   ];
 
   List<Widget> title = [
     Typo(
-      label: StaticString.home,
+      label: StaticString.home!,
       variant: TypoVariant.title,
-      color: const Color(0xFFf4f6fb),
     ),
     Typo(
       label: StaticString.transaction,
       variant: TypoVariant.title,
-      color: const Color(0xFFf4f6fb),
     ),
     Typo(
-      label: StaticString.report,
+      label: StaticString.wallet!,
       variant: TypoVariant.title,
-      color: const Color(0xFFf4f6fb),
     ),
   ];
 
@@ -58,7 +56,9 @@ class _NavigationState extends State<Navigation> {
                 builder: (context) => const NotificationScreen(),
               ),
             ),
-            icon: const Icon(Icons.notifications),
+            icon: const Icon(
+              Icons.notifications,
+            ),
           ),
           menuIconButtonMethod(),
         ],
@@ -75,11 +75,11 @@ class _NavigationState extends State<Navigation> {
           ),
           NavigationDestination(
             icon: Icon(Icons.attach_money),
-            label: "Transac",
+            label: "Transaction",
           ),
           NavigationDestination(
-            icon: Icon(Icons.report),
-            label: "Report",
+            icon: Icon(Icons.wallet),
+            label: "Wallet",
           ),
         ],
         selectedIndex: _currentIndex,
@@ -94,6 +94,7 @@ class _NavigationState extends State<Navigation> {
 
   PopupMenuButton<MenuItem> menuIconButtonMethod() {
     return PopupMenuButton<MenuItem>(
+      icon: const Icon(Icons.more_vert),
       initialValue: indexItem,
       onSelected: (MenuItem item) {
         setState(() {
@@ -118,7 +119,7 @@ class _NavigationState extends State<Navigation> {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const ProfileScreen(),
+              builder: (context) => ProfileScreen(),
             ),
           ),
           value: MenuItem.profile,
@@ -165,8 +166,7 @@ class _NavigationState extends State<Navigation> {
           ),
           TextButton(
             onPressed: () async {
-              await FirebaseAuth.instance.signOut();
-              // ignore: use_build_context_synchronously
+              context.read<LoginProvider>().logout();
               Navigator.pop(context);
             },
             child: const Typo(

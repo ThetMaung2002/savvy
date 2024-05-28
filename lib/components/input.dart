@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:savvy/constants/google_string.dart';
 
 class Input extends StatelessWidget {
@@ -28,9 +29,8 @@ class Input extends StatelessWidget {
         obscureText: securePassword,
         controller: controller,
         cursorColor: Theme.of(context).colorScheme.onSecondary,
-        style: TextStyle(
+        style: GoogleFonts.nunito(
           color: Theme.of(context).colorScheme.onSecondary,
-          fontFamily: GoogleString.itim,
         ),
         decoration: InputDecoration.collapsed(
           hintText: placehodler,

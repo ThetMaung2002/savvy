@@ -1,8 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:savvy/auth/forget_password.dart';
 import 'package:savvy/auth/register_screen.dart';
 import 'package:savvy/components/button.dart';
@@ -10,39 +10,17 @@ import 'package:savvy/components/input.dart';
 import 'package:savvy/components/typo.dart';
 import 'package:savvy/constants/static_size.dart';
 import 'package:savvy/constants/static_string.dart';
+import 'package:savvy/provider/authentication_provider/login_provider.dart';
+// import 'package:savvy/components/help_dialog.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final TextEditingController _emailController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
-
-  void _login() async {
-    showDialog(
-      context: context,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      if (kDebugMode) {
-        print(e.code);
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +117,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         Button(
                           minWidth: StaticSize.loginButton,
                           onPressed: () {
-                            _login();
+                            context.read<LoginProvider>().login(
+                                  _emailController.text,
+                                  _passwordController.text,
+                                  context,
+                                );
                           },
                           label: "Login",
                         ),
@@ -157,8 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegisterScreen(),
+                                    builder: (context) => RegisterScreen(),
                                   ),
                                 );
                               },

@@ -15,6 +15,7 @@ class Button extends StatelessWidget {
       minWidth: minWidth,
       onPressed: onPressed,
       color: Theme.of(context).colorScheme.primary,
+      highlightElevation: 0.0,
       padding: const EdgeInsets.all(20),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),

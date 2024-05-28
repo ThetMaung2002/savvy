@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Typo extends StatelessWidget {
   const Typo({
@@ -17,9 +18,8 @@ class Typo extends StatelessWidget {
     double size = _getSizeForVariant(variant);
     return Text(
       label,
-      style: TextStyle(
+      style: GoogleFonts.nunitoSans(
         fontSize: size,
-        fontFamily: 'Itim',
         color: color,
       ),
     );
@@ -32,7 +32,7 @@ class Typo extends StatelessWidget {
       case TypoVariant.header:
         return 40.0;
       case TypoVariant.label:
-        return 12.0;
+        return 14.0;
       case TypoVariant.subtitle:
         return 18.0;
       case TypoVariant.defaultVariant:
